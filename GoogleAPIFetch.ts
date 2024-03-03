@@ -1,7 +1,6 @@
 // @ts-expect-error typescript doesn't recognize @env
 import { GOOGLE_API_KEY } from '@env';
 import axios from 'axios';
-// import placesFetchCache from './PlacesFetchCache.js';
 import { NeighborhoodInfo } from './NeighborhoodInfo.js';
 import { Place } from './RandomizerScreen/Randomizer.js';
 
