@@ -7,24 +7,17 @@ import unfilledStar from '../assets/star-unfilled.png';
 export default function starRating(restaurantRating: number): ReactElement {
   const starRating = [];
   const filledNumber = Math.floor(restaurantRating);
-  let unfilledNumber = 5;
+
   for (let i = 0; i < filledNumber; i++) {
-    unfilledNumber--;
     starRating.push(
-      <Image key={'star' + i} source={filledStar} style={styles.stars}></Image>
+      <Image key={i} source={filledStar} style={styles.stars}></Image>
     );
-    if (i === filledNumber - 1) {
-      while (unfilledNumber !== 0) {
-        starRating.push(
-          <Image
-            key={'unfilled' + unfilledNumber}
-            source={unfilledStar}
-            style={styles.stars}
-          ></Image>
-        );
-        unfilledNumber--;
-      }
-    }
+  }
+
+  for (let i = filledNumber; i < 5; i++) {
+    starRating.push(
+      <Image key={i} source={unfilledStar} style={styles.stars}></Image>
+    );
   }
 
   const starContainer = <View style={styles.starContainer}>{starRating}</View>;
