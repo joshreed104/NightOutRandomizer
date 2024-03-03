@@ -15,24 +15,45 @@ export default function Randomizer(): ReactElement {
     name: "Let's pick a neighborhood",
   });
   const [nearbyRestaurants, setNearbyRestaurants] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
+  const initialState = () => {
+    return (
+      <View style={styles.initialTextContainer}>
+        <Text style={styles.initialText}>{"Let's pick a neighborhood!"}</Text>
+      </View>
+    );
+  };
+
+  const dataDisplay = (results: Place[]) => {
+    return (
+      <>
         <ScrollView
           contentContainerStyle={styles.scrollViewContainer}
           style={styles.searchResults}
           horizontal={true}
+          pagingEnabled={true}
         >
-          <View style={styles.resultsContainer}>
-            {nearbyRestaurants &&
-              nearbyRestaurants.map((restaurant, i) => (
-                <PlaceItem key={i} place={restaurant} />
-              ))}
-          </View>
+          {results.map((result, i) => (
+            <PlaceItem key={i} place={result} />
+          ))}
         </ScrollView>
-        <Text style={styles.neighborhood}>{spinResult.name}</Text>
+        <Text style={styles.neighborhoodName}>{spinResult.name}</Text>
+      </>
+    );
+  };
+
+  const currentState =
+    nearbyRestaurants.length > 0
+      ? dataDisplay(nearbyRestaurants)
+      : initialState();
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.resultsContainer}>{currentState}</View>
         <SpinButton
+          nearbyRestaurants={nearbyRestaurants}
           setNearbyRestaurants={setNearbyRestaurants}
           setSpinResult={setSpinResult}
         />
@@ -52,7 +73,17 @@ const styles = StyleSheet.create({
   },
   resultsContainer: {
     flex: 1,
-    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  initialTextContainer: {
+    justifyContent: 'center',
+  },
+  initialText: {
+    fontSize: 36,
+  },
+  neighborhoodName: {
+    fontSize: 36,
+    textAlign: 'center',
   },
   neighborhood: {
     fontSize: 50,
