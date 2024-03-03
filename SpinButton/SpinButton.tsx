@@ -29,9 +29,7 @@ const SpinButton = ({
 
     setNearbyRestaurants(restaurantSearchResults || []);
     setSpinResult(chosenNeighborhood);
-    if (restaurantSearchResults) {
-      setButtonString('Respin');
-    }
+    setButtonString('Respin');
     return;
   };
   const handleReset = () => {
