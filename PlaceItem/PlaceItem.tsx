@@ -7,15 +7,15 @@ import {
   StyleSheet,
   Linking,
 } from 'react-native';
-import type { Place } from '../Randomizer';
-import starRating from '../StarRating';
+import type { Place } from '../RandomizerScreen/Randomizer';
+import StarRating from '../StarRating';
 
 interface Props {
   place: Place;
 }
 const PlaceItem = ({ place }: Props) => {
   const { name, placeUrl, photoUrl, rating } = place;
-  const starDisplay = starRating(rating);
+  const starDisplay = StarRating(rating);
   return (
     <Pressable
       style={styles.container}
