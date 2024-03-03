@@ -5,13 +5,18 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RandomizerScreen from './RandomizerScreen';
 import DiaryScreen from './DiaryScreen';
+import BottomNavigator from './BottomNavigator';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName='randomizer' backBehavior='history'>
+      <Tab.Navigator
+        initialRouteName='randomizer'
+        backBehavior='history'
+        tabBar={(props) => <BottomNavigator {...props} />}
+      >
         <Tab.Screen
           name='randomizer'
           options={{ title: 'Spin the wheel' }}
