@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
 import React, { useState, ReactElement } from 'react';
 import PlaceItem from '../PlaceItem';
 import SpinButton from '../SpinButton';
@@ -17,25 +17,27 @@ export default function Randomizer(): ReactElement {
   const [nearbyRestaurants, setNearbyRestaurants] = useState([]);
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollViewContainer}
-        style={styles.searchResults}
-        horizontal={true}
-      >
-        <View style={styles.resultsContainer}>
-          {nearbyRestaurants &&
-            nearbyRestaurants.map((restaurant, i) => (
-              <PlaceItem key={i} place={restaurant} />
-            ))}
-        </View>
-      </ScrollView>
-      <Text style={styles.neighborhood}>{spinResult.name}</Text>
-      <SpinButton
-        setNearbyRestaurants={setNearbyRestaurants}
-        setSpinResult={setSpinResult}
-      />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <ScrollView
+          contentContainerStyle={styles.scrollViewContainer}
+          style={styles.searchResults}
+          horizontal={true}
+        >
+          <View style={styles.resultsContainer}>
+            {nearbyRestaurants &&
+              nearbyRestaurants.map((restaurant, i) => (
+                <PlaceItem key={i} place={restaurant} />
+              ))}
+          </View>
+        </ScrollView>
+        <Text style={styles.neighborhood}>{spinResult.name}</Text>
+        <SpinButton
+          setNearbyRestaurants={setNearbyRestaurants}
+          setSpinResult={setSpinResult}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -46,6 +48,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 16,
+    paddingVertical: 20,
   },
   resultsContainer: {
     flex: 1,

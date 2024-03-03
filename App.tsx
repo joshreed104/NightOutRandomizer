@@ -1,18 +1,29 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import Randomizer from './RandomizerScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import RandomizerScreen from './RandomizerScreen';
+import DiaryScreen from './DiaryScreen';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.container}>
-          <Randomizer />
-          <StatusBar style='auto' />
-        </View>
-      </SafeAreaView>
+      <Tab.Navigator initialRouteName='randomizer' backBehavior='history'>
+        <Tab.Screen
+          name='randomizer'
+          options={{ title: 'Spin the wheel' }}
+          component={RandomizerScreen}
+        />
+        <Tab.Screen
+          name='diary'
+          options={{ title: 'Diary' }}
+          component={DiaryScreen}
+        />
+      </Tab.Navigator>
+      <StatusBar style='auto' />
     </NavigationContainer>
   );
 }
