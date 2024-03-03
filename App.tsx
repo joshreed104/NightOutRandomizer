@@ -1,7 +1,8 @@
+import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import Randomizer from './Randomizer';
+import Randomizer from './RandomizerScreen';
 
 export default function App() {
   return (

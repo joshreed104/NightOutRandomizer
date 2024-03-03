@@ -1,4 +1,4 @@
-import { Place } from './Randomizer';
+import { Place } from './RandomizerScreen/Randomizer';
 
 export interface PlacesFetchCache {
   neighborhood: Place[];

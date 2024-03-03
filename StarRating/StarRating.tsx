@@ -1,12 +1,11 @@
 import { Image, StyleSheet, View } from 'react-native';
 import React from 'react';
 import type { ReactElement } from 'react';
-import filledStar from './assets/star-filled.png';
-import unfilledStar from './assets/star-unfilled.png';
+import filledStar from '../assets/star-filled.png';
+import unfilledStar from '../assets/star-unfilled.png';
 
 export default function starRating(restaurantRating: number): ReactElement {
   const starRating = [];
-  // console.log('star rating function');
   const filledNumber = Math.floor(restaurantRating);
   let unfilledNumber = 5;
   for (let i = 0; i < filledNumber; i++) {
@@ -28,7 +27,6 @@ export default function starRating(restaurantRating: number): ReactElement {
     }
   }
 
-  // console.log('star rating function');
   const starContainer = <View style={styles.starContainer}>{starRating}</View>;
   return starContainer;
 }

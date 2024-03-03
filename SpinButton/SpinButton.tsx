@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import googlePlacesFetch from '../GoogleAPIFetch';
 import neighborhoodInfo, { NeighborhoodInfo } from '../NeighborhoodInfo';
-import { Place } from '../Randomizer';
+import { Place } from '../RandomizerScreen/Randomizer';
 
 interface Props {
   setNearbyRestaurants: Dispatch<SetStateAction<never[]>>;
