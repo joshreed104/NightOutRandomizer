@@ -3,12 +3,17 @@ import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { toTitleCase } from '../utils/toTitleCase';
 
+interface NavigationRoute {
+  key: string;
+  name: string;
+  params: Record<string, string> | undefined;
+}
 const BottomNavigator = ({
   state,
   descriptors,
   navigation,
 }: BottomTabNavigationProp) => {
-  const generateTabButtons = (route, index: number) => {
+  const generateTabButtons = (route: NavigationRoute, index: number) => {
     const nameToDisplay = toTitleCase(route.name);
 
     const isFocused = state.index === index;
@@ -25,18 +30,18 @@ const BottomNavigator = ({
     };
     return (
       <TouchableOpacity
-        style={styles.buttonContainer}
+        style={styles.button}
         onPress={handleNavigation}
         key={`${route.name}Button`}
       >
-        <Text>{nameToDisplay}</Text>
+        <Text style={styles.buttonText}>{nameToDisplay}</Text>
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.root}>
-      {state.routes.map((route: Record<string, string>, index) =>
+      {state.routes.map((route: NavigationRoute, index: number) =>
         generateTabButtons(route, index)
       )}
     </View>
@@ -46,12 +51,18 @@ const BottomNavigator = ({
 const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     borderWidth: 1,
   },
-  buttonContainer: {
+  button: {
+    flex: 1,
     padding: 10,
     borderWidth: 1,
+    height: 60,
+    justifyContent: 'center',
+  },
+  buttonText: {
+    textAlign: 'center',
   },
 });
 export default BottomNavigator;
