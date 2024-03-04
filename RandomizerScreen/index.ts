@@ -1,1 +1,1 @@
-export { default } from './Randomizer';
+export { default } from './RandomizerScreen';

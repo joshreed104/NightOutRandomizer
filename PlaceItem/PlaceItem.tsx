@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Linking,
 } from 'react-native';
-import type { Place } from '../RandomizerScreen/Randomizer';
+import type { Place } from '../RandomizerScreen/RandomizerScreen';
 import StarRating from '../StarRating';
 
 interface Props {

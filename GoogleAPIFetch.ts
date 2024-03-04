@@ -2,7 +2,7 @@
 import { GOOGLE_API_KEY } from '@env';
 import axios from 'axios';
 import { NeighborhoodInfo } from './NeighborhoodInfo.js';
-import { Place } from './RandomizerScreen/Randomizer.js';
+import { Place } from './RandomizerScreen/RandomizerScreen.js';
 
 interface RawResult {
   name: string;
