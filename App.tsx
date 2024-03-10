@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RandomizerScreen from './RandomizerScreen';
 import DiaryScreen from './DiaryScreen';
 import BottomNavigator from './BottomNavigator';
+import GraphsScreen from './GraphsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +27,11 @@ export default function App() {
           name='diary'
           options={{ title: 'Diary' }}
           component={DiaryScreen}
+        />
+        <Tab.Screen
+          name='distribution'
+          options={{ title: 'Neighborhood Distribution' }}
+          component={GraphsScreen}
         />
       </Tab.Navigator>
       <StatusBar style='auto' />
