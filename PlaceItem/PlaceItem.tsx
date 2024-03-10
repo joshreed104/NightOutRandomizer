@@ -11,6 +11,7 @@ import {
 import type { Place } from '../RandomizerScreen/RandomizerScreen';
 import StarRating from '../StarRating';
 import { addPlaceToDiary } from '../placeNetwork';
+import { storePlaceInStorage } from '../utils/asyncStorage';
 
 interface Props {
   place: Place;
@@ -20,13 +21,27 @@ interface Props {
 const PlaceItem = ({ place, showAddButton }: Props) => {
   // TODO: Make separate remote and local types, map properties to JS
   // style names after fetching (e.g. place_url to placeUrl)
+  const [wasAdded, setWasAdded] = React.useState(false);
   const { name, rating, neighborhood } = place;
   const photoUrl = place.photo_url || place.photoUrl;
   const placeUrl = place.place_url || place.placeUrl;
   const starDisplay = StarRating(rating);
 
-  const addToDiary = () => {
-    addPlaceToDiary({ name, rating, neighborhood, placeUrl, photoUrl });
+  const handleAdd = async () => {
+    try {
+      const addedPlace = await addPlaceToDiary({
+        name,
+        rating,
+        neighborhood,
+        placeUrl,
+        photoUrl,
+      });
+      addedPlace && storePlaceInStorage(addedPlace);
+      setWasAdded(true);
+    } catch (error) {
+      console.error('Error adding: ', error);
+    }
+    // storePlaceInStorage({ name, rating, neighborhood, placeUrl, photoUrl });
   };
   return (
     <Pressable
@@ -48,7 +63,11 @@ const PlaceItem = ({ place, showAddButton }: Props) => {
       </Text>
       {starDisplay}
       {showAddButton && (
-        <Button onPress={addToDiary} title='Add to diary'></Button>
+        <Button
+          onPress={handleAdd}
+          title={wasAdded ? 'Added!' : 'Add to diary'}
+          disabled={wasAdded}
+        ></Button>
       )}
     </Pressable>
   );

@@ -10,7 +10,7 @@ export const addPlaceToDiary = async ({
   placeUrl,
   photoUrl,
   user_rating,
-}: DiaryEntry): Promise<void> => {
+}: DiaryEntry): Promise<DiaryEntry | null> => {
   try {
     const response = await axios.post(`${baseUrl}/places`, {
       name,
@@ -22,6 +22,7 @@ export const addPlaceToDiary = async ({
     return response.data;
   } catch (error) {
     console.log('Error saving Place: ', error);
+    return null;
   }
 };
 

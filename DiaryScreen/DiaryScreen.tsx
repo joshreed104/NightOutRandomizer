@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { addPlaceToDiary, fetchSavedPlaces } from '../placeNetwork';
 import PlaceItem from '../PlaceItem';
+import { getAllInStorage, getPlaceFromStorage } from '../utils/asyncStorage';
 
 export interface DiaryEntry {
   _id?: string;
@@ -23,8 +24,10 @@ export interface DiaryEntry {
 const DiaryScreen = (): React.ReactElement => {
   const [savedPlaces, setSavedPlaces] = React.useState([]);
   const handleFetch = async (): Promise<void> => {
-    const places = await fetchSavedPlaces();
-    setSavedPlaces(places.places);
+    // const places = await fetchSavedPlaces();
+    const places = await getAllInStorage();
+    console.log(places);
+    setSavedPlaces(places);
   };
 
   const placesToDisplay = React.useMemo(() => {
@@ -32,7 +35,7 @@ const DiaryScreen = (): React.ReactElement => {
     savedPlaces.forEach((place) => {
       placesItemsArray.push(
         <View style={styles.placeContainer}>
-          <PlaceItem key={place._id} place={place} showAddButton={false} />
+          <PlaceItem key={place.id} place={place} showAddButton={false} />
         </View>
       );
     });
