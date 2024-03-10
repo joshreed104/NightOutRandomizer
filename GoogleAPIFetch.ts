@@ -19,12 +19,17 @@ const generatePhotoUrl = (photoRef: string) => {
   return `https://maps.googleapis.com/maps/api/place/photo?maxheight=10000&key=${GOOGLE_API_KEY}&photo_reference=${photoRef}`;
 };
 
-const mapResultToModel = (rawResults: RawResult): Place => {
+const mapResultToModel = (
+  rawResults: RawResult,
+  neighborhood: string
+): Place => {
   const mappedResult = {
+    placeId: rawResults.place_id,
     name: rawResults.name,
     rating: rawResults.rating,
     placeUrl: `https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${rawResults.place_id}`,
     photoUrl: generatePhotoUrl(rawResults?.photos[0].photo_reference),
+    neighborhood,
   };
   return mappedResult;
 };
@@ -48,7 +53,7 @@ export default async function googlePlacesFetch(
       }
     );
     results = response.data.results.map((place: RawResult) =>
-      mapResultToModel(place)
+      mapResultToModel(place, chosenNeighborhood)
     );
 
     results.sort((a: Place, b: Place) => {

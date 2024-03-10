@@ -22,7 +22,7 @@ const PlaceItem = ({ place, showAddButton }: Props) => {
   // TODO: Make separate remote and local types, map properties to JS
   // style names after fetching (e.g. place_url to placeUrl)
   const [wasAdded, setWasAdded] = React.useState(false);
-  const { name, rating, neighborhood } = place;
+  const { placeId, name, rating, neighborhood } = place;
   const photoUrl = place.photo_url || place.photoUrl;
   const placeUrl = place.place_url || place.placeUrl;
   const starDisplay = StarRating(rating);
@@ -30,6 +30,7 @@ const PlaceItem = ({ place, showAddButton }: Props) => {
   const handleAdd = async () => {
     try {
       const addedPlace = await addPlaceToDiary({
+        placeId,
         name,
         rating,
         neighborhood,

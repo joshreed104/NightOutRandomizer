@@ -4,6 +4,7 @@ import PlaceItem from '../PlaceItem';
 import SpinButton from '../SpinButton';
 
 export interface Place {
+  placeId: string;
   name: string;
   rating: number;
   neighborhood: string;

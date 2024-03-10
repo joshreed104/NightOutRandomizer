@@ -12,7 +12,8 @@ import PlaceItem from '../PlaceItem';
 import { getAllInStorage, getPlaceFromStorage } from '../utils/asyncStorage';
 
 export interface DiaryEntry {
-  _id?: string;
+  dbId?: string;
+  placeId: string;
   name: string;
   rating: number;
   neighborhood: string;
@@ -34,7 +35,7 @@ const DiaryScreen = (): React.ReactElement => {
     savedPlaces.forEach((place) => {
       placesItemsArray.push(
         <View style={styles.placeContainer}>
-          <PlaceItem key={place.id} place={place} showAddButton={false} />
+          <PlaceItem key={place.placeId} place={place} showAddButton={false} />
         </View>
       );
     });
