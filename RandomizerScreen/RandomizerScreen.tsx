@@ -6,6 +6,8 @@ import SpinButton from '../SpinButton';
 export interface Place {
   name: string;
   rating: number;
+  neighborhood: string;
+  userRating?: number;
   placeUrl: string;
   photoUrl: string;
 }
@@ -32,10 +34,9 @@ export default function Randomizer(): ReactElement {
           contentContainerStyle={styles.scrollViewContainer}
           style={styles.searchResults}
           horizontal={true}
-          pagingEnabled={true}
         >
           {results.map((result, i) => (
-            <PlaceItem key={i} place={result} />
+            <PlaceItem key={i} place={result} showAddButton={true} />
           ))}
         </ScrollView>
         <Text style={styles.neighborhoodName}>{spinResult.name}</Text>

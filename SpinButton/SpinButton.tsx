@@ -27,6 +27,10 @@ const SpinButton = ({
       console.error('Error fetching places: ', e);
     }
 
+    restaurantSearchResults?.forEach(
+      (result) => (result.neighborhood = chosenNeighborhood.name)
+    );
+
     setNearbyRestaurants(restaurantSearchResults || []);
     setSpinResult(chosenNeighborhood);
     setButtonString('Respin');

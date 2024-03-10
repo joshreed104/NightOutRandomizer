@@ -6,16 +6,30 @@ import {
   Text,
   StyleSheet,
   Linking,
+  Button,
 } from 'react-native';
 import type { Place } from '../RandomizerScreen/RandomizerScreen';
 import StarRating from '../StarRating';
+import { addPlaceToDiary } from '../placeNetwork';
 
 interface Props {
   place: Place;
+  showAddButton: boolean;
 }
-const PlaceItem = ({ place }: Props) => {
-  const { name, placeUrl, photoUrl, rating } = place;
+
+const PlaceItem = ({ place, showAddButton }: Props) => {
+  // TODO: Make separate remote and local types, map properties to JS
+  // style names after fetching (e.g. place_url to placeUrl)
+  const { name, rating, neighborhood } = place;
+  const photoUrl = place.photo_url || place.photoUrl;
+  const placeUrl = place.place_url || place.placeUrl;
   const starDisplay = StarRating(rating);
+
+  const addToDiary = () => {
+    console.log('add to diary pressed');
+    addPlaceToDiary({ name, rating, neighborhood, placeUrl, photoUrl });
+  };
+  console.log(photoUrl);
   return (
     <Pressable
       style={styles.container}
@@ -35,6 +49,9 @@ const PlaceItem = ({ place }: Props) => {
         {name}: {rating}
       </Text>
       {starDisplay}
+      {showAddButton && (
+        <Button onPress={addToDiary} title='Add to diary'></Button>
+      )}
     </Pressable>
   );
 };
