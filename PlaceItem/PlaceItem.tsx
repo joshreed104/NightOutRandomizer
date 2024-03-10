@@ -26,10 +26,8 @@ const PlaceItem = ({ place, showAddButton }: Props) => {
   const starDisplay = StarRating(rating);
 
   const addToDiary = () => {
-    console.log('add to diary pressed');
     addPlaceToDiary({ name, rating, neighborhood, placeUrl, photoUrl });
   };
-  console.log(photoUrl);
   return (
     <Pressable
       style={styles.container}

@@ -27,21 +27,6 @@ const DiaryScreen = (): React.ReactElement => {
     setSavedPlaces(places.places);
   };
 
-  const handleAdd = async (): Promise<void> => {
-    let addedPlace: DiaryEntry | undefined;
-    try {
-      addedPlace = await addPlaceToDiary({
-        name: 'test name',
-        rating: 3.5,
-        neighborhood: 'Ballard',
-        user_rating: 5,
-      });
-    } catch (error) {
-      console.log('error posting: ', error);
-    }
-    addedPlace && setSavedPlaces([...savedPlaces, addedPlace]);
-  };
-
   const placesToDisplay = React.useMemo(() => {
     const placesItemsArray: React.ReactElement[] = [];
     savedPlaces.forEach((place) => {
@@ -58,7 +43,6 @@ const DiaryScreen = (): React.ReactElement => {
     <SafeAreaView>
       <Text>Hello from the Diary Screen</Text>
       <Button title='Fetch saved places' onPress={handleFetch} />
-      <Button title='Post restaurant' onPress={handleAdd} />
       <ScrollView>{placesToDisplay}</ScrollView>
     </SafeAreaView>
   );
