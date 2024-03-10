@@ -7,7 +7,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { addPlaceToDiary, fetchSavedPlaces } from '../placeNetwork';
+import { fetchSavedPlaces } from '../placeNetwork';
 import PlaceItem from '../PlaceItem';
 import { getAllInStorage, getPlaceFromStorage } from '../utils/asyncStorage';
 
@@ -26,7 +26,6 @@ const DiaryScreen = (): React.ReactElement => {
   const handleFetch = async (): Promise<void> => {
     // const places = await fetchSavedPlaces();
     const places = await getAllInStorage();
-    console.log(places);
     setSavedPlaces(places);
   };
 
