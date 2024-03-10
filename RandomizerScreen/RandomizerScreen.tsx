@@ -18,7 +18,6 @@ export default function Randomizer(): ReactElement {
     name: "Let's pick a neighborhood",
   });
   const [nearbyRestaurants, setNearbyRestaurants] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
 
   const initialState = () => {
     return (
